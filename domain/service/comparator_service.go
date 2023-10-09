@@ -2,6 +2,6 @@ package service
 
 import "ws_comparator/domain/dto"
 
-type RestaurantService interface {
-	GetFoods() ([]dto.FoodDto, dto.Response)
+type ComparatorService interface {
+	Comparator(dto.ComparatorIn) dto.Response
 }

@@ -1,21 +1,25 @@
 package dto
 
-import "ws_comparator/domain/entity"
+import (
+	"errors"
+	"net/http"
+)
 
-type FoodDto struct {
-	Id    string  `json:"id"`
-	Name  string  `json:"name"`
-	Price float32 `json:"prices"`
+type ComparatorIn struct {
+	Method      string                 `json:"method"`
+	Body        map[string]interface{} `json:"body"`
+	QueryParams map[string]string      `json:"query_params"`
+	ResponseC   map[string]interface{} `json:"response"`
+	Url         string                 `json:"url"`
 }
 
-func (g FoodDto) TransformListEntityToDto(f []entity.Food) []FoodDto {
-	var result []FoodDto
-	for _, fd := range f {
-		result = append(result, FoodDto{
-			Id:    fd.Id,
-			Name:  fd.Name,
-			Price: fd.Price,
-		})
+func (c *ComparatorIn) Validator() error {
+	if c.Method != http.MethodPost && c.Method != http.MethodGet {
+		return errors.New("método HTTP no permitido")
 	}
-	return result
+
+	/*if len(c.Body) == 0 {
+		return errors.New("la solicitud debe contener un cuerpo")
+	}*/
+	return nil
 }

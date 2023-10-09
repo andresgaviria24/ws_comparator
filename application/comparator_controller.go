@@ -9,25 +9,33 @@ import (
 )
 
 type ComparatorController struct {
-	restaurantService service.RestaurantService
+	comparatorService service.ComparatorService
 }
 
 func InitComparatorController(router *gin.Engine) {
 	comparatorController := ComparatorController{
-		restaurantService: service.InitComparatorServiceImpl(),
+		comparatorService: service.InitComparatorServiceImpl(),
 	}
-	router.POST("v1/request/configuration", comparatorController.ComparatorHandler)
+	router.POST("v1/request/comparation", comparatorController.ComparatorHandler)
 }
 
 func (r *ComparatorController) ComparatorHandler(c *gin.Context) {
 
-	var response dto.Response
+	var (
+		response   dto.Response
+		comparator dto.ComparatorIn
+	)
 
-	foods, response := r.restaurantService.GetFoods()
+	if err := c.ShouldBindJSON(&comparator); err != nil {
+		c.JSON(http.StatusUnprocessableEntity, dto.Response{})
+		return
+	}
+
+	response = r.comparatorService.Comparator(comparator)
 
 	if response.Status != http.StatusOK {
 		c.JSON(response.Status, response)
 		return
 	}
-	c.JSON(response.Status, foods)
+	c.JSON(response.Status, response)
 }
