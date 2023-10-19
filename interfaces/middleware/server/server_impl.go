@@ -8,6 +8,8 @@ import (
 	"ws_comparator/interfaces/middleware"
 
 	"github.com/gin-gonic/gin"
+	"github.com/newrelic/go-agent/v3/integrations/nrgin"
+	"github.com/newrelic/go-agent/v3/newrelic"
 	swaggerFiles "github.com/swaggo/files" // swagger embed files
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -20,9 +22,18 @@ func InitServer() Server {
 	serverImpl := &ServerImpl{}
 	router := gin.Default()
 	router.Use(middleware.CORSMiddleware())
-	swaggerDocs()
+
+	app, _ := newrelic.NewApplication(
+		newrelic.ConfigAppName(os.Getenv("SERVICE_NAME")),
+		newrelic.ConfigLicense(os.Getenv("NEW_RELIC_LICENSE_KEY")),
+		//newrelic.ConfigDebugLogger(os.Stdout),
+	)
+
+	router.Use(nrgin.Middleware(app))
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	application.InitComparatorController(router)
+	application.InitComparatorController(router, app)
+
+	swaggerDocs()
 	serverImpl.router = router
 	return serverImpl
 }

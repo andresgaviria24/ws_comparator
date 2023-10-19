@@ -1,7 +1,11 @@
 package service
 
-import "ws_comparator/domain/dto"
+import (
+	"ws_comparator/domain/dto"
+
+	"github.com/newrelic/go-agent/v3/newrelic"
+)
 
 type ComparatorService interface {
-	Comparator(dto.ComparatorIn) dto.Response
+	Comparator(dto.ComparatorIn, *newrelic.Application) dto.Response
 }
