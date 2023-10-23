@@ -74,39 +74,6 @@ func TestComparatorHandlerBody(t *testing.T) {
 	assert.Equal(t, http.StatusUnprocessableEntity, response.Code)
 }
 
-/*
-func TestComparatorHandler_InvalidJSON(t *testing.T) {
-	// Preparar un router de prueba de Gin
-	//router := gin.Default()
-
-	// Configurar un contexto de prueba
-	w := httptest.NewRecorder()
-	c, _ := gin.CreateTestContext(w)
-
-	// Crear un JSON de solicitud no válido
-	invalidJSON := `{"invalid_json": "}`
-
-	// Configurar la solicitud con el JSON no válido
-	req, _ := http.NewRequest("POST", "/v1/request/comparation", strings.NewReader(invalidJSON))
-	c.Request = req
-
-	// Inicializar un mock de New Relic Application
-	newrelicApp := &newrelic.Application{}
-
-	// Configurar el controlador con el servicio de mock y la aplicación de New Relic de mock
-	controller := &ComparatorController{
-		comparatorService: &MockComparatorService{},
-		newrelicClient:    newrelicApp,
-	}
-
-	// Ejecutar el controlador
-	controller.ComparatorHandler(c)
-
-	// Verificar que la respuesta sea un código 422 (Unprocessable Entity) debido al JSON no válido
-	assert.Equal(t, http.StatusUnprocessableEntity, w.Code)
-}
-*/
-
 var comparatorJSON = `{
 	"method": "POST",
 	"body": {

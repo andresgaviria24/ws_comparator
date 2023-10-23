@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 	"ws_comparator/domain/dto"
-	"ws_comparator/infrastructure/diff"
+	diffjson "ws_comparator/infrastructure/diff_json"
 	newrelic_metrics "ws_comparator/infrastructure/newrelic"
 	"ws_comparator/infrastructure/persistence"
 	"ws_comparator/infrastructure/repository"
@@ -55,7 +55,7 @@ func (r *ComparatorServiceImpl) Comparator(comparator dto.ComparatorIn, app *new
 		return responseWithError(response, app)
 	}
 
-	diff, deltaJSON := diff.Diff(result, comparator)
+	diff, deltaJSON := diffjson.DiffJson(result, comparator)
 
 	newrelic_metrics.SendMetric(diff, app, deltaJSON)
 

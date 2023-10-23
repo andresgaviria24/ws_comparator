@@ -2,12 +2,12 @@ package newrelic_metrics
 
 import (
 	"os"
+	"ws_comparator/infrastructure/diff"
 
 	"github.com/newrelic/go-agent/v3/newrelic"
-	"github.com/yudai/gojsondiff"
 )
 
-func SendMetric(diff gojsondiff.Diff, app *newrelic.Application, diffJson string) {
+func SendMetric(diff diff.Diff, app *newrelic.Application, diffJson string) {
 	if len(diff.Deltas()) == 0 {
 		app.RecordCustomMetric(os.Getenv("SERVICE_NAME")+".identical_answer", 1)
 	} else {
