@@ -1,7 +1,7 @@
 *IMPORTANT*
 This basic proyect is for show ddd (https://www.paradigmadigital.com/dev/ddd-dominio-implica-crecer-fuerte/) with golang, remember, ddd can be implemented in many ways depending on the author!
 
-# Web Service Restaurant
+# Web Service Comparator
 WS for get food and orders.
 
 # Start 🚀
@@ -25,46 +25,7 @@ It is necessary to install -> https://golang.org/
 # Project Structure 🧱
 
 ```
-go-ddd
-├─ .DS_Store
-├─ BD_Restaurant.sql
-├─ README.md
-└─ WS_Restaurant
-   ├─ .DS_Store
-   ├─ .env
-   ├─ application
-   │  └─ RestaurantController.go
-   ├─ docs
-   │  ├─ docs.go
-   │  ├─ swagger.json
-   │  └─ swagger.yaml
-   ├─ domain
-   │  ├─ dto
-   │  │  ├─ FoodDto.go
-   │  │  ├─ Response.go
-   │  │  └─ UserDto.go
-   │  ├─ entity
-   │  │  ├─ Food.go
-   │  │  ├─ Order.go
-   │  │  └─ Users.go
-   │  └─ service
-   │     ├─ RestaurantService.go
-   │     └─ RestaurantServiceImpl.go
-   ├─ go.mod
-   ├─ go.sum
-   ├─ infrastructure
-   │  ├─ persistence
-   │  │  ├─ DbHelper.go
-   │  │  └─ FoodRepositoryImpl.go
-   │  └─ repository
-   │     └─ FoodRepository.go
-   ├─ interfaces
-   │  └─ middleware
-   │     ├─ CORSMiddleware.go
-   │     └─ server
-   │        ├─ Server.go
-   │        └─ ServerImpl.go
-   └─ main.go
+
 
 ```
 
@@ -73,9 +34,7 @@ go-ddd
     - Goland
 
 # Endpoints
-    - GET /food
-
+   
 # Authors
 Andrés Gaviria
-Semi Senior III Developer
 andres_felipe_gaviria28@hotmail.com
